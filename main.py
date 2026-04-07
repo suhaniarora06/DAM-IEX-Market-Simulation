@@ -28,7 +28,7 @@ def main():
 
     # ── Step 1: Preprocessing ─────────────────────────────────────────────
     banner("STEP 1 / 5  –  Data Preprocessing")
-    from step1_data_preprocessing1 import preprocess
+    from step1_data_preprocessing import preprocess
     df = preprocess(data_dir)
 
     # ── Step 2: Demand Curve ──────────────────────────────────────────────
