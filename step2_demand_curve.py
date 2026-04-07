@@ -40,7 +40,13 @@ def fit_demand_model(df: pd.DataFrame):
     pl.fit(X, y)
     cv_rmse = -cross_val_score(pl, X, y, cv=5,
                                scoring="neg_root_mean_squared_error").mean()
+    cv_mae = -cross_val_score(pl, X, y, cv=5,
+                               scoring="neg_mean_absolute_error").mean()
+    cv_r2 = cross_val_score(pl, X, y, cv=5,
+                               scoring="r2").mean()
     print(f"  MCP ridge model  5-fold CV RMSE : {cv_rmse:.1f}  Rs/MWh")
+    print(f"  MCP ridge model  5-fold CV MAE : {cv_mae:.1f}  Rs/MWh")
+    print(f"  MCP ridge model  5-fold CV R2 : {cv_r2:.1f}  Rs/MWh")
     return pl, feat_cols
 
 
