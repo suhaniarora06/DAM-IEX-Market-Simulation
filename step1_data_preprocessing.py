@@ -152,7 +152,7 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     df["mcp_lag96"] = df["mcp"].shift(96)
 
     # Optional but recommended
-    df = df.dropna(subset=["mcp_lag1"]).reset_index(drop=True)
+    #df = df.dropna(subset=["mcp_lag1"]).reset_index(drop=True)
 
     # ── Market features ──
     df["scarcity_ratio"] = (
