@@ -33,7 +33,12 @@ def extract_month_order(filename):
 def load_monthly_file(filepath: str) -> pd.DataFrame:
     print(f"\nLoading: {filepath}")
 
-    df = pd.read_excel(filepath, header=HEADER_ROW)
+    if "SEPTEMBER" in filepath:
+        df = pd.read_excel(filepath, header=4)
+    else:
+        df = pd.read_excel(filepath, header=HEADER_ROW)
+
+    #df = pd.read_excel(filepath, header=HEADER_ROW)
 
     # Clean column names
     df.columns = df.columns.str.strip()
@@ -140,6 +145,14 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
 
     # ── FINAL SORT (MOST IMPORTANT FIX) ──
     df = df.sort_values(["date", "slot"]).reset_index(drop=True)
+
+    # ── ADD LAG FEATURES (YOU ARE MISSING THIS) ──
+    df["mcp_lag1"]  = df["mcp"].shift(1)
+    df["mcp_lag4"]  = df["mcp"].shift(4)
+    df["mcp_lag96"] = df["mcp"].shift(96)
+
+    # Optional but recommended
+    df = df.dropna(subset=["mcp_lag1"]).reset_index(drop=True)
 
     # ── Market features ──
     df["scarcity_ratio"] = (
