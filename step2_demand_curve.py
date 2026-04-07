@@ -27,7 +27,7 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 DEMAND_FEATURES = [
     "purchase_bid_mw", "mcv_mw", "scarcity_ratio",
     "slot", "is_peak", "is_weekend", "month",
-    "mcp_lag1", "mcp_lag4",
+    "mcp_lag1", "mcp_lag4", "mcp_lag96"
 ]
 
 
